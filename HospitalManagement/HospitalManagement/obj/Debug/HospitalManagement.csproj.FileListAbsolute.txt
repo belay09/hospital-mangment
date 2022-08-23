@@ -11,3 +11,4 @@ C:\Users\hi\Source\Repos\HospitalManagement\HospitalManagement\obj\Debug\Hospita
 C:\Users\hi\Source\Repos\HospitalManagement\HospitalManagement\obj\Debug\HospitalManagement.exe
 C:\Users\hi\Source\Repos\HospitalManagement\HospitalManagement\obj\Debug\HospitalManagement.pdb
 C:\Users\hi\Source\Repos\HospitalManagement\HospitalManagement\obj\Debug\HospitalManagement.AdminManage.resources
+C:\Users\hi\Source\Repos\HospitalManagement\HospitalManagement\obj\Debug\HospitalManagement.Nurse.resources

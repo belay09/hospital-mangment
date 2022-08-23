@@ -19,9 +19,10 @@ namespace HospitalManagement
 
         private void button2_Click(object sender, EventArgs e)
         {
-            SqlConnection cn = new SqlConnection(@"Data Source=DESKTOP-A9E7P23\ADAGN;Initial Catalog=hospital;Integrated Security=True");
-            cn.Open();
-            SqlCommand cmd = new SqlCommand("SELECT Employe.EmployeID,Employe.FirstName,Employe.LastName,Employe.mobile,EmployeDetail.Aprove FROM Employe INNER JOIN EmployeDetail ON EmployeDetail.EmployeID = employe.EmployeID ", cn);
+            SqlConnection conn = connectionCls.openConnection();
+            
+            conn.Open();
+            SqlCommand cmd = new SqlCommand("SELECT Employe.EmployeID,Employe.FirstName,Employe.LastName,Employe.mobile,EmployeDetail.Aprove FROM Employe INNER JOIN EmployeDetail ON EmployeDetail.EmployeID = employe.EmployeID ", conn);
             try
 
             {
@@ -52,12 +53,18 @@ namespace HospitalManagement
 
         private void button1_Click(object sender, EventArgs e)
         {
-            SqlConnection cn = new SqlConnection(@"Data Source=DESKTOP-A9E7P23\ADAGN;Initial Catalog=hospital;Integrated Security=True");
-            cn.Open();
-            SqlCommand cmd = new SqlCommand("exec AproveAccaunt @aprove=@apr,@ID=@id;", cn);
+            SqlConnection conn = connectionCls.openConnection();
+
+            conn.Open();
+            SqlCommand cmd = new SqlCommand("exec AproveAccaunt @aprove=@apr,@ID=@id;", conn);
             cmd.Parameters.AddWithValue("apr", comboBox1.SelectedItem);
             cmd.Parameters.AddWithValue("id", textBox2.Text);
             cmd.ExecuteNonQuery();
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }

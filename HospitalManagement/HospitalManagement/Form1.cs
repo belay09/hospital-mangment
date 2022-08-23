@@ -35,12 +35,13 @@ namespace HospitalManagement
 
         private void button1_Click(object sender, EventArgs e)
         {
-            SqlConnection cn = new SqlConnection(@"Data Source=DESKTOP-A9E7P23\ADAGN;Initial Catalog=hospital;Integrated Security=True");
-            cn.Open();
+            SqlConnection conn = connectionCls.openConnection();
+
+            conn.Open();
             if (textBox1.Text != string.Empty && textBox2.Text != string.Empty)
             {
 
-                SqlCommand cmd = new SqlCommand("select * from EmployeUser where UserName ='" + textBox1.Text + "' and Password='" + textBox2.Text + "' and Spaciality ='" + comboBox1.SelectedItem + "'", cn);
+                SqlCommand cmd = new SqlCommand("select * from EmployeUser where UserName ='" + textBox1.Text + "' and Password='" + textBox2.Text + "' and Spaciality ='" + comboBox1.SelectedItem + "'", conn);
                 SqlDataReader dr = cmd.ExecuteReader();
                 if (dr.Read())
                 {
@@ -55,7 +56,7 @@ namespace HospitalManagement
 
                     dr.Close();
 
-                    SqlCommand command = new SqlCommand("eXEC EmployeIdFinder @mobile = '" + textBox1.Text + "';", cn);
+                    SqlCommand command = new SqlCommand("eXEC EmployeIdFinder @mobile = '" + textBox1.Text + "';", conn);
 
                     SqlDataReader reader = command.ExecuteReader();
 
@@ -66,7 +67,7 @@ namespace HospitalManagement
                     }
                     reader.Close();
 
-                    SqlCommand comand = new SqlCommand("exec AprovalCheck @emID=@id; ;", cn);
+                    SqlCommand comand = new SqlCommand("exec AprovalCheck @emID=@id; ;", conn);
                     comand.Parameters.AddWithValue("id", firstVariable1);
                     comand.ExecuteNonQuery();
                     SqlDataReader reder = comand.ExecuteReader();
@@ -141,15 +142,15 @@ namespace HospitalManagement
 
         private void signbutton_Click(object sender, EventArgs e)
         {
-            SqlConnection cn = new SqlConnection(@"Data Source=DESKTOP-A9E7P23\ADAGN;Initial Catalog=hospital;Integrated Security=True");
+            SqlConnection conn = connectionCls.openConnection();
 
-            cn.Open();
+            conn.Open();
 
             if (textBox3.Text != string.Empty && textBox4.Text != string.Empty && textBox5.Text != string.Empty && textBox6.Text != string.Empty && textBox7.Text != string.Empty && textBox8.Text != string.Empty && textBox9.Text != string.Empty && textBox10.Text != string.Empty && textBox11.Text != string.Empty)
             {
                 if (textBox6.Text == textBox7.Text)
                 {
-                    SqlCommand cmd = new SqlCommand("select * from EmployeUser where UserName='" + textBox3.Text + "'", cn);
+                    SqlCommand cmd = new SqlCommand("select * from EmployeUser where UserName='" + textBox3.Text + "'", conn);
                     SqlDataReader dr = cmd.ExecuteReader();
                     if (dr.Read())
                     {
@@ -162,7 +163,7 @@ namespace HospitalManagement
                         cmd = new SqlCommand("EXEC RigisterEmploye @FirstName = @fname," +
                             "@LastName = @lname,@Address = @adr, @City = @cty," +
                             " @salary = @slry, @mobile = @mbl, @UserName = @uname," +
-                            "@Password = @pass, @Spaciality = @privilage; ", cn);
+                            "@Password = @pass, @Spaciality = @privilage; ", conn);
                         cmd.Parameters.AddWithValue("fname", textBox3.Text);
                         cmd.Parameters.AddWithValue("lname", textBox4.Text);
                         cmd.Parameters.AddWithValue("adr", textBox11.Text);
